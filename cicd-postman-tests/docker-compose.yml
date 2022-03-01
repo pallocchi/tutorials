@@ -1,0 +1,14 @@
+version: '3'
+services:
+  cicd-postman-tests-api:
+    container_name: cicd-postman-tests-api
+    image: vad1mo/hello-world-rest
+  cicd-postman-tests-newman:
+    container_name: cicd-postman-tests-newman
+    image: postman/newman
+    entrypoint: sh
+    command: /src/newman-wrapper.sh
+    volumes:
+      - ./src:/src
+    depends_on:
+      - cicd-postman-tests-api
